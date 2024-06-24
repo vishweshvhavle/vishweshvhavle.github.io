@@ -6,6 +6,9 @@ import alfredImage from './images/alfred.png';
 import testBedImage from './images/testbed.png';
 import navigationImage from './images/sim2.png';
 import motionPredictionImage from './images/tnt.png';
+import bunnyImage from './images/bunny.png';
+import armImage from './images/arm.png';
+import autoBotImage from './images/autobot.png';
 
 const Portfolio = () => {
   const [activeTab, setActiveTab] = useState('about');
@@ -23,86 +26,99 @@ const Portfolio = () => {
     {
       title: "Alfred: Autonomous Mobile Robot",
       image: alfredImage,
+      description: [ "An open-source autonomous mobile robot platform for advanced robotics research."],
       details: [
-        "Designed and manufactured a UGV platform from scratch",
-        "Equipped with Velodyne VLP-16 LiDAR, NVIDIA AGX Orin, Intel NUC, and Intel RealSense Depth Camera",
-        "Developed UGV Firmware, Control System, Perception stack, SLAM, Navigation, and Path-planning",
-        "Novel open-source platform for advanced robotics research"
+        "- Designed and manufactured a UGV platform from scratch",
+        "- Equipped with Velodyne VLP-16 LiDAR, NVIDIA AGX Orin, Intel NUC, and Intel RealSense Depth Camera",
+        "- Developed UGV Firmware, Control System, Perception stack, SLAM, Navigation, and Path-planning",
+        "- Open-source platform for advanced robotics research"
       ],
-      link: "https://github.com/yourusername/alfred-ugv"
-    },
+      link: "https://github.com/vishweshvhavle/alfred/"
+    },  
     {
       title: "Test Bed for Simulated Robotics",
       image: testBedImage,
+      description: [ "A 200 sqm facility for real-time tracking and deep-RL policy transfer."],
       details: [
-        "Developed a 200 sqm UGV Test-Bed facility",
-        "Implemented 6 ceiling-mounted cameras and NVIDIA Jetsons",
-        "Achieved average tracking error of less than 2 cm using novel camera-LiDAR cross-calibration",
-        "Optimized image-processing pipeline for 22 FPS real-time trajectory detection",
-        "Deployed UDP server-client network for efficient data transfer"
+        "- Developed a 200 sqm UGV Test-Bed facility",
+        "- 6 ceiling-mounted cameras and NVIDIA Jetsons for real-time tracking",
+        "- Achieved average tracking error of less than 2 cm",
+        "- Novel camera-LiDAR cross-calibration technique",
+        "- Optimized image-processing pipeline",
+        "- UDP server-client network for 22 FPS real-time trajectory detection",
+        "- Enables Sim-to-Real Transfer of Deep-RL policies"
       ],
-      link: "https://github.com/yourusername/ugv-testbed"
+      link: "https://drive.google.com/file/d/1VTPbL9K_OmTGgPaHCfnb2N_AGln1dtN9/view?usp=sharing"
     },
     {
       title: "Navigation and Exploration Through Deep RL",
       image: navigationImage,
+      description: [ "Implementation of a TD3 policy gradient algorithm for autonomous navigation."],
       details: [
-        "Implemented Twin-delayed deep deterministic (TD3) policy gradient algorithm",
-        "Applied to model-free, off-policy, online reinforcement learning",
-        "Utilized ROS2 and Gazebo in Python on Turtlebot 3",
-        "Incorporated observations from VLP-16 LiDAR for environment sensing"
+        "- Implemented Twin-delayed deep deterministic (TD3) policy gradient algorithm",
+        "- Model-free, off-policy, online reinforcement learning",
+        "- Utilized ROS2 and Gazebo in Python",
+        "- Deployed on Turtlebot 3 with VLP-16 LiDAR observations"
       ],
-      link: "https://github.com/yourusername/deep-rl-navigation"
+      link: "https://github.com/vishweshvhavle/deep-rl-navigation"
     },
     {
       title: "Motion Prediction of Vehicular Traffic",
       image: motionPredictionImage,
+      description: [ "Frameworks for predicting future trajectories of traffic agents."],
       details: [
-        "Developed frameworks for predicting future trajectories of traffic agents",
-        "Investigated data-driven and model-based methods for trajectory predictions",
-        "Integrated data-driven Trajectory Prediction framework using PyTorch",
-        "Implemented on the autonomous vehicle project at IIIT Delhi"
+        "- Developed frameworks for predicting future trajectories of traffic agents",
+        "- Investigated data-driven and model-based methods",
+        "- Integrated data-driven Trajectory Prediction framework using PyTorch",
+        "- Implemented on autonomous vehicle at IIIT Delhi"
       ],
-      link: "https://github.com/yourusername/motion-prediction"
+      link: "https://github.com/vishweshvhavle/TNT-Trajectory-Prediction"
     },
     {
       title: "Solid Texture Synthesis",
+      image: bunnyImage,
+      description: [ "Synthesizing solid textures from 2D exemplars using non-parametric methods."],
       details: [
-        "Implemented Solid Texture Synthesis from 2D Exemplars",
-        "Used non-parametric texture optimization approach",
-        "Integrated histogram matching for improved synthesized solid global statistics",
-        "Developed end-to-end rendering pipeline using OpenGL and C++"
+        "- Implemented Solid Texture Synthesis from 2D Exemplars",
+        "- Used non-parametric texture optimization approach",
+        "- Integrated histogram matching for improved synthesized solid global statistics",
+        "- Developed end-to-end rendering pipeline using OpenGL and C++"
       ],
-      link: "https://github.com/yourusername/solid-texture-synthesis"
+      link: "https://github.com/vishweshvhavle/solid-texture-synthesis"
     },
     {
       title: "Cylindrical Manipulator with Linear Gripper",
+      image: armImage,
+      description: [ "3-DOF cylindrical robotic manipulator with linear gripper for package sorting."],
       details: [
-        "Developed 3-DOF cylindrical robotic manipulator and linear gripper",
-        "Implemented position control for package sorting",
-        "Created Perception stack with Robot Hand-Eye Coordination",
-        "Based on 'Single-Stage Keypoint-Based Category-Level Object Pose Estimation from an RGB Image' by Lin et al.",
-        "Used Intel Realsense D455 camera for gripping point determination"
+        "- Developed 3-DOF cylindrical robotic manipulator and linear gripper",
+        "- Position control for package sorting",
+        "- Implemented Perception stack with Robot Hand-Eye Coordination",
+        "- Based on 'Single-Stage Keypoint-Based Category-Level Object Pose Estimation from an RGB Image' by Lin et al.",
+        "- Used Intel Realsense D455 camera for gripping point determination"
       ],
-      link: "https://github.com/yourusername/cylindrical-manipulator"
+      link: "https://youtu.be/to7IvqKXnhQ"
     },
     {
       title: "Autonomous Central Navigation for Multi-Agent Robotics",
+      image: autoBotImage,
+      description: [ "Central navigation system for multi-agent robotics using ATMega microcontroller."],
       details: [
-        "Designed and fabricated 4 bots using ATMega microcontroller",
-        "Incorporated manipulator for package drop functionality",
-        "Designed central navigation system using ARuCo marker-based live tracking",
-        "Implemented multi-agent path planning using A* algorithm"
+        "- Designed and fabricated 4 bots using ATMega microcontroller",
+        "- Included manipulator for package drop",
+        "- Designed central navigation system",
+        "- Used ARuCo marker-based live tracking",
+        "- Implemented multi-agent path planning using A* algorithm"
       ],
-      link: "https://github.com/yourusername/multi-agent-navigation"
+      link: "https://drive.google.com/drive/folders/10-bGFo7b6reio7eZTLztf6eE0pG8L1za?usp=sharing"
     }
-  ];
+  ];  
 
   const experiences = [
     {
       title: "Research Assistant",
       company: "Vision Lab, IIIT Delhi",
-      period: "May 2022 – Present",
+      period: "May 2022 – May 2024",
       description: "Designed UGV platforms, developed Test-Bed facilities, and contributed to Multi-Object Tracking frameworks."
     },
     {
@@ -114,11 +130,11 @@ const Portfolio = () => {
   ];
 
   const skills = [
-    { category: "Programming Languages", items: ["C/C++", "Python", "Java", "Bash (Shell)", "MATLAB", "PHP", "Elixir"] },
-    { category: "Tools and Technologies", items: ["OpenCV", "ROS1/ROS2", "PyTorch", "OpenGL", "Git", "Linux", "Windows"] },
+    { category: "Programming Languages", items: ["C/C++", "Python", "Java", "Bash (Shell)", "MATLAB", "PHP", "Elixir", "JavaScript"] },
+    { category: "Tools and Technologies", items: ["OpenCV", "ROS1/ROS2", "PyTorch", "Tensorflow", "CUDA", "OpenGL", "Git", "Linux", "Windows", "React", "Tailwind CSS", "WebGL", "Firebase", "Google Cloud", "WebRTC", "gRPC", "RabbitMQ", "Kubernetes"] },
     { category: "Hardware", items: ["ATmega", "ATtiny", "Raspberry Pi", "ESP8266"] },
     { category: "Tools and Prototyping", items: ["Autodesk Fusion 360", "Adobe Creative Suite", "Microsoft Office", "Figma", "Tinkercad"] },
-  ];
+  ];  
 
   const awards = [
     { year: 2023, title: "Top-Up Fellowship by ARTPARK, IISc Bangalore" },
@@ -177,32 +193,34 @@ const Portfolio = () => {
                 <div className="backdrop-blur-md bg-black bg-opacity-30 p-6 rounded-lg mb-6 shadow-lg">
                   <h2 className="text-2xl font-semibold mb-4 text-red-500">About Me</h2>
                   <p className="text-gray-300">
-                    I'm a Computer Science Engineering student at IIIT Delhi, passionate about robotics, 
-                    computer vision, and autonomous systems. My experience spans from developing UGV platforms 
-                    to implementing cutting-edge algorithms in reinforcement learning and computer vision.
+                    I'm a Computer Science Engineering graduate from IIIT Delhi, passionate about Robotics, Simultaneous Localization and Mapping (SLAM), 
+                    3D Computer Vision, Deep Learning, Reinforcement Learning and Neural Rendering. Interested in AR/VR and LLM/VLMs. Please feel free to 
+                    contact me for any opportunities or collaborations!
                   </p>
                 </div>
-                <div className="relative mb-6">
+                <div className="relative">
                   <div className="backdrop-blur-md bg-black bg-opacity-30 p-6 rounded-lg shadow-lg">
                     <div className="flex items-start">
                       <img src={projects[currentProjectIndex].image} alt={projects[currentProjectIndex].title} className="w-48 h-48 object-cover rounded-lg mr-6 flex-shrink-0" />
                       <div>
                         <h3 className="text-xl font-medium text-red-400 mb-2">{projects[currentProjectIndex].title}</h3>
-                        {projects[currentProjectIndex].details.map((detail, index) => (
-                          <p key={index} className="text-gray-300">{detail}</p>
-                        ))}
-                        <a href={projects[currentProjectIndex].link} target="_blank" rel="noopener noreferrer" className="text-red-500 hover:text-red-400 transition-colors mt-2 inline-block">
-                          View Project
-                        </a>
+                        <div className="text-gray-300">
+                          {projects[currentProjectIndex].description.map((description, index) => (
+                            <p key={index} className="mb-1">{description}</p>
+                          ))}
+                        </div>
+                        {projects[currentProjectIndex].link && (
+                          <a href={projects[currentProjectIndex].link} target="_blank" rel="noopener noreferrer" className="text-red-500 hover:text-red-400 transition-colors mt-2 inline-block">
+                            View Project
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex justify-between">
-                  <button onClick={prevProject} className="p-2 rounded-full backdrop-blur-md bg-black bg-opacity-30 text-red-500 hover:text-red-400 transition-colors shadow-lg">
+                  <button onClick={prevProject} className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 backdrop-blur-md bg-black bg-opacity-30 p-2 rounded-full text-red-500 hover:text-red-400 transition-colors">
                     <ChevronLeft size={24} />
                   </button>
-                  <button onClick={nextProject} className="p-2 rounded-full backdrop-blur-md bg-black bg-opacity-30 text-red-500 hover:text-red-400 transition-colors shadow-lg">
+                  <button onClick={nextProject} className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 backdrop-blur-md bg-black bg-opacity-30 p-2 rounded-full text-red-500 hover:text-red-400 transition-colors">
                     <ChevronRight size={24} />
                   </button>
                 </div>
@@ -227,14 +245,12 @@ const Portfolio = () => {
                 <h2 className="text-2xl font-semibold mb-4 text-red-500">Projects</h2>
                 {projects.map((project, index) => (
                   <div key={index} className="mb-8 last:mb-0 backdrop-blur-md bg-black bg-opacity-30 p-6 rounded-lg shadow-lg">
-                    <div className="flex items-start">
-                      {project.image && (
-                        <img src={project.image} alt={project.title} className="w-48 h-48 object-cover rounded-lg mr-6 flex-shrink-0" />
-                      )}
+                    <div className="flex flex-col md:flex-row items-center md:items-start">
+                      <img src={project.image} alt={project.title} className="w-full md:w-64 h-64 object-cover rounded-lg mb-4 md:mb-0 md:mr-6" />
                       <div>
                         <h3 className="text-xl font-medium text-red-400 mb-2">{project.title}</h3>
-                        {project.details.map((detail, detailIndex) => (
-                          <p key={detailIndex} className="text-gray-300">{detail}</p>
+                        {project.details.map((detail, i) => (
+                          <p key={i} className="text-gray-300 mb-1">{detail}</p>
                         ))}
                         {project.link && (
                           <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-red-500 hover:text-red-400 transition-colors mt-2 inline-block">
@@ -246,7 +262,7 @@ const Portfolio = () => {
                   </div>
                 ))}
               </div>
-            )}
+            )}    
 
             {activeTab === 'skills' && (
               <div>
@@ -270,7 +286,7 @@ const Portfolio = () => {
               <div>
                 <h2 className="text-2xl font-semibold mb-4 text-red-500">Awards & Achievements</h2>
                 {awards.map((award, index) => (
-                  <div key={index} className="mb-4 last:mb-0 backdrop-blur-md bg-black bg-opacity-30 p-6 rounded-lg shadow-lg">
+                  <div key={index} className="mb-4 backdrop-blur-md bg-black bg-opacity-30 p-6 rounded-lg shadow-lg">
                     <h3 className="text-lg font-medium text-red-400">{award.year}</h3>
                     <p className="text-gray-300">{award.title}</p>
                   </div>
