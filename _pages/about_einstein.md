@@ -1,1 +1,0 @@
- I work at the intersection of 3D Computer Vision, Robotics, and Computer Graphics. I am interested in leveraging their interplay, along with representation learning, to advance methodologies across these domains. 

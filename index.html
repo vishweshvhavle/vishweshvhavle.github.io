@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3DVisLab</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico">
+    
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    
+    <style>
+        /* Custom cursor only for desktop/non-touch devices */
+        @media (hover: hover) and (pointer: fine) {
+            *, *::before, *::after {
+                cursor: none !important;
+            }
+        
+            #custom-cursor {
+                position: fixed !important;
+                width: 20px !important;
+                height: 20px !important;
+                border-radius: 50% !important;
+                background-color: white !important;
+                pointer-events: none !important;
+                z-index: 999999 !important;
+                transition: width 0.2s ease, height 0.2s ease !important;
+                transform: translate(-50%, -50%) !important;
+                mix-blend-mode: difference !important;
+                display: block !important;
+                opacity: 1 !important;
+            }
+        
+            #custom-cursor.hover {
+                width: 40px !important;
+                height: 40px !important;
+            }
+        }
+
+        /* Hide custom cursor on mobile/touch devices */
+        @media (hover: none) or (pointer: coarse) {
+            #custom-cursor {
+                display: none !important;
+            }
+            
+            *, *::before, *::after {
+                cursor: auto !important;
+            }
+        }
+
+        /* Slideshow styling with background images */
+        .slideshow-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background: transparent;
+        }
+
+        .slide {
+            position: relative;
+            display: none;
+            background: transparent;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .slide:nth-child(1)::before {
+            background-image: url('assets/img/dataset.gif');
+        }
+
+        .slide:nth-child(2)::before {
+            background-image: url('assets/img/tree_generation.gif');
+        }
+
+        .slide:nth-child(3)::before {
+            background-image: url('assets/img/terrain_3dv_teaser_render.jpg');
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(50, 50, 50, 0.8));
+            z-index: 2;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 3;
+            padding: 2rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 400px;
+        }
+
+        .slide-content h3 {
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-content p {
+            display: none;
+        }
+
+        .slide-image {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-logo-section" onclick="showTab('home')">
+                    <div class="nav-logo-icon">
+                        <img src="/assets/images/3dvis.gif" alt="3DVis Group Logo">
+                    </div>
+                    <span class="nav-logo-text">3DVisLab</span>
+                </div>
+                
+                <ul class="nav-tabs">
+                    <li><button class="tab-btn" onclick="showTab('publications')">Publications</button></li>
+                    <li><button class="tab-btn" onclick="showTab('datasets')">Datasets</button></li>
+                    <li><button class="tab-btn" onclick="showTab('team')">People</button></li>
+                    <li><button class="tab-btn" onclick="showTab('openings')">Openings</button></li>
+                    <li><button class="tab-btn" onclick="showTab('contact')">Contact</button></li>
+                </ul>
+                
+                <div class="nav-right">
+                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                        <span id="theme-icon">☀️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Home Tab -->
+            <div id="home" class="tab-content active">
+                <!-- Slideshow Section -->
+                <div class="slideshow-container">
+                    <div class="slide active">
+                        <div class="slide-content">
+                            <h3>Human Body Reconstruction</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h3>Tree Generation & Modeling</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h3>Terrain Generation</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News Section -->
+                <div class="news-main-section">
+                    <div class="news-header">
+                        <h2>Latest News & Updates</h2>
+                    </div>
+                    <div class="news-container">
+                        <div class="news-content" style="max-height: 300px; overflow-y: auto; padding-right: 10px;">
+                            <div class="news-item news-highlight">
+                                <div class="news-meta">
+                                    <span class="news-category">Conference</span>
+                                    <span class="news-date">November 2025</span>
+                                </div>
+                                <h3 class="news-title">Paper Accepted at AAAI 2026</h3>
+                                <p class="news-desc">One paper accepted at the Association for the Advancement of Artificial Intelligence (AAAI) 2026.</p>
+                            </div>
+
+                            <div class="news-item news-highlight">
+                                <div class="news-meta">
+                                    <span class="news-category">Conference</span>
+                                    <span class="news-date">October 2025</span>
+                                </div>
+                                <h3 class="news-title">Technical Communications Paper at SIGGRAPH Asia 2025</h3>
+                                <p class="news-desc">Our research work has been accepted as a Technical Communications paper at SIGGRAPH Asia 2025.</p>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-meta">
+                                    <span class="news-category">Award</span>
+                                    <span class="news-date">September 2025</span>
+                                </div>
+                                <h3 class="news-title">Qualcomm Innovation Fellowship India 2025</h3>
+                                <p class="news-desc">Our team has been awarded the prestigious Qualcomm Innovation Fellowship India 2025 for outstanding research contributions.</p>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-meta">
+                                    <span class="news-category">Conference</span>
+                                    <span class="news-date">October 2025</span>
+                                </div>
+                                <h3 class="news-title">Paper Accepted at ICCV 2025</h3>
+                                <p class="news-desc">One paper accepted at the International Conference on Computer Vision (ICCV) 2025.</p>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-meta">
+                                    <span class="news-category">Conference</span>
+                                    <span class="news-date">December 2024</span>
+                                </div>
+                                <h3 class="news-title">Paper Accepted at ICVGIP 2024</h3>
+                                <p class="news-desc">One paper accepted at the Indian Conference on Computer Vision, Graphics and Image Processing (ICVGIP) 2024.</p>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-meta">
+                                    <span class="news-category">Conference</span>
+                                    <span class="news-date">September 2024</span>
+                                </div>
+                                <h3 class="news-title">Paper Accepted at ECCV 2024</h3>
+                                <p class="news-desc">One paper accepted at the European Conference on Computer Vision (ECCV) 2024.</p>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-meta">
+                                    <span class="news-category">Conference</span>
+                                    <span class="news-date">June 2024</span>
+                                </div>
+                                <h3 class="news-title">Paper Accepted at CVPR 2024</h3>
+                                <p class="news-desc">One paper accepted at the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) 2024.</p>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-meta">
+                                    <span class="news-category">Conference</span>
+                                    <span class="news-date">May 2024</span>
+                                </div>
+                                <h3 class="news-title">Paper Accepted at ICRA 2024</h3>
+                                <p class="news-desc">One paper accepted at the IEEE International Conference on Robotics and Automation (ICRA) 2024.</p>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-meta">
+                                    <span class="news-category">Conference</span>
+                                    <span class="news-date">January 2024</span>
+                                </div>
+                                <h3 class="news-title">Paper Accepted at 3DV 2024</h3>
+                                <p class="news-desc">One paper accepted at the International Conference on 3D Vision (3DV) 2024.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research Agenda Section -->
+                <div class="news-header">
+                    <h2>About Us</h2>
+                </div>
+                <div class="research-agenda">
+                    <p class="research-overview">
+                        This is a research group led by <a href="components/profile/avinash.html" style="color: var(--accent-primary); text-decoration: none;">Dr Avinash Sharma</a>, who has recently moved to <a href="https://cse.iitj.ac.in/" target="_blank" style="color: var(--accent-primary); text-decoration: none;">Computer Science & Engineering department, IIT Jodhpur</a> as an associate professor while continuing his affiliation with <a href="https://cvit.iiit.ac.in/" target="_blank" style="color: var(--accent-primary); text-decoration: none;">Centre for Visual Information Technology (CVIT), IIIT Hyderabad</a>. We primarily work on the computer vision and machine learning problems with a focus on 3D scene understanding and reconstruction. Specifically, we deal with problems where human body is reconstructed from 2D images and analysed in 3D, generation & analysis of 3D terrains, registration of point clouds of indoor scenes captured from commodity sensors as well as large outdoor scenes captured from LIDAR scanners. Students part of our group have been honored as recipients of prestigious fellowships from Google, Tata Consultancy Services (TCS), and Qualcomm.
+                    </p>
+                    
+                    <ul class="research-list">
+                        <li class="research-item">
+                            <h3>Human Garment Modeling</h3>
+                            <p>Reconstructing clothed human bodies from monocular data. Generation of novel garments.</p>
+                        </li>
+                        
+                        <li class="research-item">
+                            <h3>Human Head Modeling</h3>
+                            <p>High-fidelity facial reconstruction, relighting, and animation of head avatars. </p>
+                        </li>
+                        
+                        <li class="research-item">
+                            <h3>Tree Reconstruction and Generation</h3>
+                            <p>Creating realistic 3D tree models from images for virtual world assets.</p>
+                        </li>
+                        
+                        <li class="research-item">
+                            <h3>Terrain Modelling and Generation</h3>
+                            <p>Large-scale outdoor environment modeling and generation.</p>
+                        </li>
+                        
+                        <li class="research-item">
+                            <h3>Point-Cloud Processing</h3>
+                            <p>SLAM, Point-Cloud Forecasting for autonomous driving.</p>
+                        </li>
+                        
+                        <li class="research-item">
+                            <h3>Human Body Modelling</h3>
+                            <p>3D body shape and pose estimation. Human motion tracking and generation.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Other Tab Containers - Will be loaded dynamically -->
+            <div id="publications" class="tab-content"></div>
+            <div id="datasets" class="tab-content"></div>
+            <div id="team" class="tab-content"></div>
+            <div id="openings" class="tab-content"></div>
+            <div id="contact" class="tab-content"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logos">
+                    <div class="footer-logo-item">
+                        <div class="footer-logo-badge">
+                            <img src="/assets/images/3dvislab.png" alt="3DVis Group Logo">
+                        </div>
+                    </div>
+                    <a href="https://www.iitj.ac.in" target="_blank" class="footer-logo-item footer-logo-link">
+                        <div class="footer-logo-badge">
+                            <img src="/assets/images/iitj-logo-orange.png" alt="IIT Jodhpur Logo">
+                        </div>
+                    </a>
+                    <a href="https://cvit.iiit.ac.in/" target="_blank" class="footer-logo-item footer-logo-link">
+                        <div class="footer-logo-badge">
+                            <img src="/assets/images/cvit-logo.png" alt="CVIT">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 3DVisLab, Department of Computer Science & Engineering, Indian Institute of Technology Jodhpur. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Management
+        function initializeTheme() {
+            let savedTheme = localStorage.getItem('theme');
+            if (!savedTheme) {
+                savedTheme = 'dark';
+                localStorage.setItem('theme', 'dark');
+            }
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update both desktop and mobile icons
+            const desktopIcon = document.getElementById('theme-icon');
+            const mobileIcon = document.getElementById('mobile-theme-icon');
+            
+            if (desktopIcon) {
+                desktopIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            }
+            if (mobileIcon) {
+                mobileIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+        
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const selectedTab = document.getElementById(tabName);
+            if (selectedTab) selectedTab.classList.add('active');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            showSlide(0);
+        });
+    </script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/loader.js"></script>
+    <script src="/assets/js/tabs.js"></script>
+    <script src="/assets/js/slideshow.js"></script>
+    <script src="/assets/js/cursor.js"></script>
+    <script src="/assets/js/mobile-menu.js"></script>
+</body>
+</html>

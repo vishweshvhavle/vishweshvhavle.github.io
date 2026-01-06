@@ -1,0 +1,336 @@
+/* Responsive Design - responsive.css */
+
+@media (max-width: 768px) {
+    /* Mobile Menu Toggle Button */
+    .mobile-menu-toggle {
+        display: block !important;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 28px;
+        cursor: pointer;
+        padding: 8px;
+        line-height: 1;
+        z-index: 1001;
+    }
+
+    /* Navigation */
+    .nav-container {
+        position: relative;
+        padding: 15px 0;
+    }
+
+    /* Logo section */
+    .nav-logo-section {
+        position: relative;
+        z-index: 1002;
+    }
+
+    /* Hide desktop theme toggle on mobile */
+    .nav-right {
+        display: none !important;
+    }
+
+    /* Hide navigation tabs by default on mobile */
+    .nav-tabs {
+        display: flex !important;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        border-bottom: 2px solid var(--accent-primary);
+        list-style: none;
+        gap: 0;
+    }
+
+    /* Show menu when active */
+    .nav-tabs.active {
+        max-height: 600px;
+        opacity: 1;
+    }
+
+    .nav-tabs li {
+        width: 100%;
+        margin: 0;
+    }
+
+    .nav-tabs button {
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+        text-align: left;
+        border-radius: 8px;
+        margin-bottom: 5px;
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        cursor: pointer;
+    }
+
+    .nav-tabs button:hover {
+        background: var(--bg-secondary);
+    }
+
+    /* Mobile theme toggle */
+    .mobile-theme-toggle {
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+        text-align: left;
+        border-radius: 8px;
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        cursor: pointer;
+        margin-top: 10px;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .mobile-theme-toggle:hover {
+        background: var(--bg-secondary);
+    }
+
+    /* Publications Page - Mobile */
+    .publication-card {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .publication-teaser {
+        width: 100%;
+        height: 200px;
+        margin: 0;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .publication-info {
+        padding: 20px;
+    }
+
+    .publication-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .publication-title {
+        font-size: 18px;
+    }
+
+    .publication-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .action-btn {
+        flex: 1 1 auto;
+        min-width: 80px;
+        justify-content: center;
+    }
+
+    /* Contact Page - Mobile */
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .contact-card {
+        padding: 20px;
+    }
+
+    .contact-card[style*="grid-column: span 3"] {
+        grid-column: span 1 !important;
+    }
+
+    .map-embed {
+        height: 250px;
+    }
+
+    .map-embed iframe {
+        height: 250px;
+    }
+
+    /* Research List */
+    .research-list {
+        grid-template-columns: 1fr;
+    }
+
+    /* Slideshow */
+    .slideshow-container {
+        margin-top: 20px;
+    }
+
+    .slide-content {
+        min-height: 250px;
+        padding: 1.5rem;
+        max-width: 100%;
+    }
+
+    .slide-content h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Team Grid */
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .team-member {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .member-photo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .member-actions {
+        flex-direction: column;
+    }
+
+    .member-action-btn {
+        width: 100%;
+    }
+
+    /* Footer */
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer-logos {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+    }
+
+    .footer-logo-badge {
+        height: 60px;
+    }
+
+    .footer-logo-badge img {
+        height: 55px;
+    }
+
+    /* Container padding */
+    .container {
+        padding: 0 16px;
+    }
+
+    /* Access Info */
+    .access-info {
+        padding: 20px;
+    }
+
+    .apply-actions {
+        flex-direction: column;
+    }
+
+    .apply-actions .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* News Section */
+    .news-content {
+        max-height: 400px;
+    }
+
+    .news-item {
+        padding: 15px 20px;
+    }
+
+    .news-meta {
+        flex-wrap: wrap;
+    }
+
+    /* Contact Actions */
+    .contact-actions {
+        margin-top: 12px;
+    }
+
+    .contact-actions .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Hide mobile elements on desktop */
+@media (min-width: 769px) {
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .mobile-theme-toggle {
+        display: none !important;
+    }
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+    /* Publications Page - Mobile */
+    .publication-card {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .publication-teaser {
+        width: 100%;
+        height: 200px;
+        margin: 0;
+        border-radius: 0;
+        background: #ffffff;
+        padding: 12px;
+    }
+
+    .publication-teaser img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .publication-info {
+        padding: 20px;
+    }
+
+    .publication-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .publication-title {
+        font-size: 18px;
+    }
+
+    .publication-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .action-btn {
+        flex: 1 1 auto;
+        min-width: 80px;
+        justify-content: center;
+    }
+}

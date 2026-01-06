@@ -1,0 +1,114 @@
+<!-- Datasets Tab Content -->
+<div class="publications-container">
+    <div class="container">
+        <h2 style="color: var(--text-primary); font-size: 28px; margin-bottom: 30px;">Research Datasets</h2>
+        
+        <!-- Dataset 1 -->
+    <div class="publication-card dataset-card">
+        <div class="dataset-teaser">
+          <img src="assets/img/dataset_static.jpeg" alt="3DHumans Dataset">
+        </div>
+        <div class="dataset-info">
+          <div class="publication-header">
+            <div>
+              <span class="publication-type type-dataset">3D Scanning</span>
+            </div>
+            <div class="publication-year">2022</div>
+          </div>
+          <div class="publication-title">
+            3DHumans: High-Fidelity 3D Scans of People in Diverse Clothing Styles
+          </div>
+          <p class="publication-description">
+            180+ high-quality 3D meshes of people in diverse garments with SMPL parameters.
+          </p>
+          <div class="publication-actions">
+            <a href="https://cvit.iiit.ac.in/research/projects/cvit-projects/3dhumans" class="action-btn">More Details</a>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Dataset 2 -->
+      <div class="publication-card dataset-card">
+        <div class="dataset-teaser">
+          <img src="assets/img/4dhumans_teaser.png" alt="4DHumans Dataset">
+        </div>
+        <div class="dataset-info">
+          <div class="publication-header">
+            <div>
+              <span class="publication-type type-dataset">Temporal Data</span>
+              <span class="publication-type type-intern">Coming Soon</span>
+            </div>
+            <div class="publication-year">2024</div>
+          </div>
+          <div class="publication-title">
+            4DHumans: Temporally Consistent Dynamic Scans of Humans in Motion
+          </div>
+          <p class="publication-description">
+            Multi-view sequences of human actions captured with calibrated Kinect cameras.
+          </p>
+          <div class="publication-actions">
+            <a href="components/datasets/4dhumans.html" class="action-btn">More Details</a>
+          </div>
+        </div>
+      </div>
+
+        <div class="access-info">
+            <h3>How to Access Datasets</h3>
+            <p>To request access to our research datasets, please contact us with your research proposal and intended use. Some datasets may require institutional approval or data use agreements. Click "More Details" on each dataset to learn about access procedures, technical specifications, and download options.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Dataset-specific layout overrides (minimal custom CSS) */
+    .dataset-card {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    .dataset-teaser {
+      flex-shrink: 0;
+      width: 460px; /* increased teaser width */
+      height: 260px;
+      overflow: hidden;
+      border-radius: 12px 0 0 12px;
+    }
+    
+    .dataset-teaser img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .dataset-card:hover .dataset-teaser img {
+      transform: scale(1.05);
+    }
+    
+    .dataset-info {
+      flex: 1;
+      padding: 25px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    @media (max-width: 900px) {
+      .dataset-card {
+        flex-direction: column;
+      }
+    
+      .dataset-teaser {
+        width: 100%;
+        height: 220px;
+        border-radius: 12px 12px 0 0;
+      }
+    
+      .dataset-info {
+        padding: 20px;
+      }
+    }
+    </style>

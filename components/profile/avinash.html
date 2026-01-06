@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Avinash Sharma - 3DVisLab</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="../../image/x-icon" href="../../assets/favicon_io/favicon.ico">
+    
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    
+    <style>
+        /* Custom cursor only for desktop/non-touch devices */
+        @media (hover: hover) and (pointer: fine) {
+            *, *::before, *::after {
+                cursor: none !important;
+            }
+        
+            #custom-cursor {
+                position: fixed !important;
+                width: 20px !important;
+                height: 20px !important;
+                border-radius: 50% !important;
+                background-color: white !important;
+                pointer-events: none !important;
+                z-index: 999999 !important;
+                transition: width 0.2s ease, height 0.2s ease !important;
+                transform: translate(-50%, -50%) !important;
+                mix-blend-mode: difference !important;
+                display: block !important;
+                opacity: 1 !important;
+            }
+        
+            #custom-cursor.hover {
+                width: 40px !important;
+                height: 40px !important;
+            }
+        }
+
+        /* Hide custom cursor on mobile/touch devices */
+        @media (hover: none) or (pointer: coarse) {
+            #custom-cursor {
+                display: none !important;
+            }
+            
+            *, *::before, *::after {
+                cursor: auto !important;
+            }
+        }
+
+        .profile-container {
+            display: flex;
+            gap: 3em;
+            margin: 2em 0;
+            align-items: flex-start;
+        }
+
+        .profile-image {
+            flex-shrink: 0;
+            width: 250px;
+            height: 250px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-content {
+            flex: 1;
+        }
+
+        .profile-links {
+            display: flex;
+            gap: 1.5em;
+            margin: 2em 0;
+            flex-wrap: wrap;
+        }
+
+        .profile-links a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            padding: 0.5em 1em;
+            border: 1px solid var(--accent-primary);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-links a:hover {
+            background-color: var(--accent-primary);
+            color: white;
+        }
+
+        .reviewer-section {
+            background-color: var(--bg-secondary);
+            padding: 1.5em;
+            border-radius: 8px;
+            margin-top: 2em;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .profile-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-logo-section" onclick="showTab('home')">
+                    <div class="nav-logo-icon">
+                        <img src="../../assets/images/3dvis.gif" alt="3DVis Group Logo">
+                    </div>
+                    <span class="nav-logo-text">3DVisLab</span>
+                </div>
+                
+                <ul class="nav-tabs">
+                    <li><button class="tab-btn" onclick="showTab('publications')">Publications</button></li>
+                    <li><button class="tab-btn" onclick="showTab('datasets')">Datasets</button></li>
+                    <li><button class="tab-btn" onclick="showTab('team')">People</button></li>
+                    <li><button class="tab-btn" onclick="showTab('openings')">Openings</button></li>
+                    <li><button class="tab-btn" onclick="showTab('contact')">Contact</button></li>
+                </ul>
+                
+                <div class="nav-right">
+                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                        <span id="theme-icon">☀️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 0.4em;">
+                Dr. Avinash Sharma
+            </h1>
+            <hr style="border: none; border-top: 1px solid var(--border-color); margin-bottom: 1.5em;">
+
+            <h4 style="color: var(--text-secondary); font-weight: 500; margin-bottom: 2em;">
+                Associate Professor, Department of Computer Science & Engineering<br>
+                Indian Institute of Technology Jodhpur
+            </h4>
+
+            <div class="profile-container">
+                <img src="../../assets/profile/avinash.png" alt="Dr. Avinash Sharma" class="profile-image">
+                
+                <div class="profile-content">
+                    <section style="margin-bottom: 2em;">
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1em;">
+                            I am Dr Avinash Sharma, an associate professor at the <a href="https://cse.iitj.ac.in/" target="_blank" style="color: var(--accent-primary); text-decoration: none;">Computer Science & Engineering department, IIT Jodhpur</a>. Previously, I was affiliated with <a href="https://cvit.iiit.ac.in/" target="_blank" style="color: var(--accent-primary); text-decoration: none;">Centre for Visual Information Technology (CVIT), IIIT Hyderabad</a> for eight years. Prior to this, I was a Research Scientist at Xerox Research Center India.
+                        </p>
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1em;">
+                            I graduated with MS by Research in Computer Vision from IIIT-H and PhD in Applied Mathematics from INP Grenoble and INRIA Rhone-Alpes. I have been recently awarded the Google Faculty Award on two separate occasions.
+                        </p>
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Here at CSE@IITJ, I am building a large group of students whose research is inclined towards 3D computer vision, AR/VR and Graphics.
+                        </p>
+                    </section>
+
+                    <div class="profile-links">
+                        <a href="../../assets/pdfs/CV.pdf" target="_blank">CV</a>
+                        <a href="https://scholar.google.co.in/citations?user=4ladtC0AAAAJ&hl=en" target="_blank">Google Scholar</a>
+                        <a href="mailto:avinashsharma@iitj.ac.in">avinashsharma@iitj.ac.in</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reviewer-section">
+                <h3 style="margin-bottom: 1em; color: var(--text-primary);">Program Committee Member / Reviewer</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    CVPR, AAAI, ACCV, WACV, ICRA, ICPR, IJCAI, IJCNN, ICVGIP, CODS, Frontier Journal, Computer Animation and Virtual World
+                </p>
+            </div>
+
+            <!-- Other Tab Containers - Will be loaded dynamically -->
+            <div id="publications" class="tab-content"></div>
+            <div id="datasets" class="tab-content"></div>
+            <div id="team" class="tab-content"></div>
+            <div id="openings" class="tab-content"></div>
+            <div id="contact" class="tab-content"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logos">
+                    <a href="https://www.iitj.ac.in" target="_blank" class="footer-logo-item footer-logo-link">
+                        <div class="footer-logo-badge">
+                            <img src="../../assets/images/iitj-logo-orange.png" alt="IIT Jodhpur Logo">
+                        </div>
+                    </a>
+                    <div class="footer-logo-item">
+                        <div class="footer-logo-badge">
+                            <img src="../../assets/images/3dvislab.png" alt="3DVis Group Logo">
+                        </div>
+                    </div>
+                    <a href="https://cvit.iiit.ac.in/" target="_blank" class="footer-logo-item footer-logo-link">
+                        <div class="footer-logo-badge">
+                            <img src="../../assets/images/cvit-logo.png" alt="CVIT">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 3DVisLab, Department of Computer Science & Engineering, Indian Institute of Technology Jodhpur. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Remove all inline functions - let project-loader.js handle everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for project-loader to initialize
+            setTimeout(() => {
+                // Navigation is handled by loaded navbar
+                const navBtns = document.querySelectorAll('.tab-btn');
+                navBtns.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const tab = this.getAttribute('onclick')?.match(/showTab\('(.+?)'\)/)?.[1];
+                        if (tab) {
+                            // Navigate to main page with tab
+                            window.location.href = `../../index.html#${tab}`;
+                        }
+                    });
+                });
+                
+                // Logo click
+                const logo = document.querySelector('.nav-logo-section');
+                if (logo) {
+                    logo.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        window.location.href = '../../index.html';
+                    });
+                }
+            }, 200);
+        });
+    </script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/loader.js"></script>
+    <script src="../../assets/js/slideshow.js"></script>
+    <script src="../../assets/js/cursor.js"></script>
+    <script src="../../assets/js/project-loader.js"></script>
+    <script src="../../assets/js/mobile-menu.js"></script>
+</body>
+</html>
