@@ -3,168 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3DVisLab</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico">
-    
-    <!-- External CSS Files -->
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="stylesheet" href="/assets/css/components.css">
-    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <title>Vishwesh Vhavle - Portfolio</title>
     
     <style>
-        /* Custom cursor only for desktop/non-touch devices */
-        @media (hover: hover) and (pointer: fine) {
-            *, *::before, *::after {
-                cursor: none !important;
-            }
-        
-            #custom-cursor {
-                position: fixed !important;
-                width: 20px !important;
-                height: 20px !important;
-                border-radius: 50% !important;
-                background-color: white !important;
-                pointer-events: none !important;
-                z-index: 999999 !important;
-                transition: width 0.2s ease, height 0.2s ease !important;
-                transform: translate(-50%, -50%) !important;
-                mix-blend-mode: difference !important;
-                display: block !important;
-                opacity: 1 !important;
-            }
-        
-            #custom-cursor.hover {
-                width: 40px !important;
-                height: 40px !important;
-            }
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #3b82f6;
+            --accent-hover: #2563eb;
+            --border-color: #2a2a2a;
         }
 
-        /* Hide custom cursor on mobile/touch devices */
-        @media (hover: none) or (pointer: coarse) {
-            #custom-cursor {
-                display: none !important;
-            }
-            
-            *, *::before, *::after {
-                cursor: auto !important;
-            }
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --accent-primary: #3b82f6;
+            --accent-hover: #2563eb;
+            --border-color: #e5e7eb;
         }
 
-        /* Slideshow styling with background images */
-        .slideshow-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            background: transparent;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .slide {
-            position: relative;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-secondary);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-tabs button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-tabs button:hover,
+        .nav-tabs button.active {
+            color: var(--accent-primary);
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .hero-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            flex-shrink: 0;
+            border: 4px solid var(--accent-primary);
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+        }
+
+        /* Tab Content */
+        .tab-content {
             display: none;
-            background: transparent;
+            padding: 3rem 0;
         }
 
-        .slide.active {
+        .tab-content.active {
             display: block;
         }
 
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: 1;
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
         }
 
-        .slide:nth-child(1)::before {
-            background-image: url('assets/img/dataset.gif');
+        /* Publications */
+        .publication-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .slide:nth-child(2)::before {
-            background-image: url('assets/img/tree_generation.gif');
+        .publication-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
 
-        .slide:nth-child(3)::before {
-            background-image: url('assets/img/terrain_3dv_teaser_render.jpg');
+        .publication-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
-        .slide::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(50, 50, 50, 0.8));
-            z-index: 2;
-        }
-
-        .slide-content {
-            position: relative;
-            z-index: 3;
-            padding: 2rem;
+        .publication-year {
+            display: inline-block;
+            background: var(--accent-primary);
             color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Experience */
+        .experience-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-header {
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            min-height: 400px;
+            justify-content: space-between;
+            margin-bottom: 1rem;
         }
 
-        .slide-content h3 {
+        .experience-header h3 {
+            color: var(--text-primary);
+        }
+
+        .experience-header span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .experience-item h4 {
+            color: var(--accent-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item ul {
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .experience-item li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .project-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Awards */
+        .awards-list {
+            list-style: none;
+        }
+
+        .award-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .award-year {
+            background: var(--accent-primary);
             color: white;
-            font-size: 2.5rem;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            flex-shrink: 0;
         }
 
-        .slide-content p {
-            display: none;
+        .award-content {
+            flex: 1;
         }
 
-        .slide-image {
-            display: none;
+        .award-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-tabs {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div id="custom-cursor"></div>
-
     <!-- Navigation -->
     <nav>
         <div class="container">
             <div class="nav-container">
-                <div class="nav-logo-section" onclick="showTab('home')">
-                    <div class="nav-logo-icon">
-                        <img src="/assets/images/3dvis.gif" alt="3DVis Group Logo">
-                    </div>
-                    <span class="nav-logo-text">3DVisLab</span>
-                </div>
-                
+                <div class="nav-logo">Vishwesh Vhavle</div>
                 <ul class="nav-tabs">
+                    <li><button class="tab-btn active" onclick="showTab('about')">About</button></li>
                     <li><button class="tab-btn" onclick="showTab('publications')">Publications</button></li>
-                    <li><button class="tab-btn" onclick="showTab('datasets')">Datasets</button></li>
-                    <li><button class="tab-btn" onclick="showTab('team')">People</button></li>
-                    <li><button class="tab-btn" onclick="showTab('openings')">Openings</button></li>
-                    <li><button class="tab-btn" onclick="showTab('contact')">Contact</button></li>
+                    <li><button class="tab-btn" onclick="showTab('experience')">Experience</button></li
+                    <li><button class="tab-btn" onclick="showTab('projects')">Projects</button></li>
+                    <li><button class="tab-btn" onclick="showTab('awards')">Awards</button></li>
                 </ul>
-                
-                <div class="nav-right">
-                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-                        <span id="theme-icon">☀️</span>
-                    </button>
-                </div>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span id="theme-icon">☀️</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -172,208 +384,256 @@
     <!-- Main Content -->
     <main>
         <div class="container">
-            <!-- Home Tab -->
-            <div id="home" class="tab-content active">
-                <!-- Slideshow Section -->
-                <div class="slideshow-container">
-                    <div class="slide active">
-                        <div class="slide-content">
-                            <h3>Human Body Reconstruction</h3>
-                        </div>
+            <!-- About Tab -->
+            <div id="about" class="tab-content active">
+                <div class="hero">
+                    <div class="hero-photo">
+                        <!-- Replace with actual photo -->
+                        <img src="assets/profile/profile.jpeg" alt="Vishwesh Vhavle" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                     </div>
-                    <div class="slide">
-                        <div class="slide-content">
-                            <h3>Tree Generation & Modeling</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="slide-content">
-                            <h3>Terrain Generation</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- News Section -->
-                <div class="news-main-section">
-                    <div class="news-header">
-                        <h2>Latest News & Updates</h2>
-                    </div>
-                    <div class="news-container">
-                        <div class="news-content" style="max-height: 300px; overflow-y: auto; padding-right: 10px;">
-                            <div class="news-item news-highlight">
-                                <div class="news-meta">
-                                    <span class="news-category">Conference</span>
-                                    <span class="news-date">November 2025</span>
-                                </div>
-                                <h3 class="news-title">Paper Accepted at AAAI 2026</h3>
-                                <p class="news-desc">One paper accepted at the Association for the Advancement of Artificial Intelligence (AAAI) 2026.</p>
-                            </div>
-
-                            <div class="news-item news-highlight">
-                                <div class="news-meta">
-                                    <span class="news-category">Conference</span>
-                                    <span class="news-date">October 2025</span>
-                                </div>
-                                <h3 class="news-title">Technical Communications Paper at SIGGRAPH Asia 2025</h3>
-                                <p class="news-desc">Our research work has been accepted as a Technical Communications paper at SIGGRAPH Asia 2025.</p>
-                            </div>
-                            
-                            <div class="news-item">
-                                <div class="news-meta">
-                                    <span class="news-category">Award</span>
-                                    <span class="news-date">September 2025</span>
-                                </div>
-                                <h3 class="news-title">Qualcomm Innovation Fellowship India 2025</h3>
-                                <p class="news-desc">Our team has been awarded the prestigious Qualcomm Innovation Fellowship India 2025 for outstanding research contributions.</p>
-                            </div>
-                            
-                            <div class="news-item">
-                                <div class="news-meta">
-                                    <span class="news-category">Conference</span>
-                                    <span class="news-date">October 2025</span>
-                                </div>
-                                <h3 class="news-title">Paper Accepted at ICCV 2025</h3>
-                                <p class="news-desc">One paper accepted at the International Conference on Computer Vision (ICCV) 2025.</p>
-                            </div>
-                            
-                            <div class="news-item">
-                                <div class="news-meta">
-                                    <span class="news-category">Conference</span>
-                                    <span class="news-date">December 2024</span>
-                                </div>
-                                <h3 class="news-title">Paper Accepted at ICVGIP 2024</h3>
-                                <p class="news-desc">One paper accepted at the Indian Conference on Computer Vision, Graphics and Image Processing (ICVGIP) 2024.</p>
-                            </div>
-                            
-                            <div class="news-item">
-                                <div class="news-meta">
-                                    <span class="news-category">Conference</span>
-                                    <span class="news-date">September 2024</span>
-                                </div>
-                                <h3 class="news-title">Paper Accepted at ECCV 2024</h3>
-                                <p class="news-desc">One paper accepted at the European Conference on Computer Vision (ECCV) 2024.</p>
-                            </div>
-                            
-                            <div class="news-item">
-                                <div class="news-meta">
-                                    <span class="news-category">Conference</span>
-                                    <span class="news-date">June 2024</span>
-                                </div>
-                                <h3 class="news-title">Paper Accepted at CVPR 2024</h3>
-                                <p class="news-desc">One paper accepted at the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) 2024.</p>
-                            </div>
-                            
-                            <div class="news-item">
-                                <div class="news-meta">
-                                    <span class="news-category">Conference</span>
-                                    <span class="news-date">May 2024</span>
-                                </div>
-                                <h3 class="news-title">Paper Accepted at ICRA 2024</h3>
-                                <p class="news-desc">One paper accepted at the IEEE International Conference on Robotics and Automation (ICRA) 2024.</p>
-                            </div>
-                            
-                            <div class="news-item">
-                                <div class="news-meta">
-                                    <span class="news-category">Conference</span>
-                                    <span class="news-date">January 2024</span>
-                                </div>
-                                <h3 class="news-title">Paper Accepted at 3DV 2024</h3>
-                                <p class="news-desc">One paper accepted at the International Conference on 3D Vision (3DV) 2024.</p>
-                            </div>
+                    <div class="hero-content">
+                        <h1>Vishwesh Vhavle</h1>
+                        <p>
+                            I work at the intersection of 3D Computer Vision, Robotics, and Computer Graphics. 
+                            I am interested in leveraging their interplay, along with representation learning, 
+                            to advance methodologies across these domains.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="assets/pdfs/Vishwesh_Vhavle_CV.pdf" class="btn btn-primary" download>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                </svg>
+                                Download CV
+                            </a>
+                            <a href="mailto:vishweshvhavle@gmail.com" class="btn btn-secondary">Contact</a>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Research Agenda Section -->
-                <div class="news-header">
-                    <h2>About Us</h2>
+            <!-- Publications Tab -->
+            <div id="publications" class="tab-content">
+                <h2>Publications</h2>
+                
+                <div class="publication-item">
+                    <span class="publication-year">2025</span>
+                    <h3>Camera3DMM: Leveraging Perspective Camera for Estimating Parametric 3D Head Models</h3>
+                    <p><strong>Vishwesh Vhavle</strong>, Hiteshi Jain, and Avinash Sharma</p>
+                    <p>SIGGRAPH Asia Technical Communications, 2025</p>
                 </div>
-                <div class="research-agenda">
-                    <p class="research-overview">
-                        This is a research group led by <a href="components/profile/avinash.html" style="color: var(--accent-primary); text-decoration: none;">Dr Avinash Sharma</a>, who has recently moved to <a href="https://cse.iitj.ac.in/" target="_blank" style="color: var(--accent-primary); text-decoration: none;">Computer Science & Engineering department, IIT Jodhpur</a> as an associate professor while continuing his affiliation with <a href="https://cvit.iiit.ac.in/" target="_blank" style="color: var(--accent-primary); text-decoration: none;">Centre for Visual Information Technology (CVIT), IIIT Hyderabad</a>. We primarily work on the computer vision and machine learning problems with a focus on 3D scene understanding and reconstruction. Specifically, we deal with problems where human body is reconstructed from 2D images and analysed in 3D, generation & analysis of 3D terrains, registration of point clouds of indoor scenes captured from commodity sensors as well as large outdoor scenes captured from LIDAR scanners. Students part of our group have been honored as recipients of prestigious fellowships from Google, Tata Consultancy Services (TCS), and Qualcomm.
-                    </p>
-                    
-                    <ul class="research-list">
-                        <li class="research-item">
-                            <h3>Human Garment Modeling</h3>
-                            <p>Reconstructing clothed human bodies from monocular data. Generation of novel garments.</p>
-                        </li>
-                        
-                        <li class="research-item">
-                            <h3>Human Head Modeling</h3>
-                            <p>High-fidelity facial reconstruction, relighting, and animation of head avatars. </p>
-                        </li>
-                        
-                        <li class="research-item">
-                            <h3>Tree Reconstruction and Generation</h3>
-                            <p>Creating realistic 3D tree models from images for virtual world assets.</p>
-                        </li>
-                        
-                        <li class="research-item">
-                            <h3>Terrain Modelling and Generation</h3>
-                            <p>Large-scale outdoor environment modeling and generation.</p>
-                        </li>
-                        
-                        <li class="research-item">
-                            <h3>Point-Cloud Processing</h3>
-                            <p>SLAM, Point-Cloud Forecasting for autonomous driving.</p>
-                        </li>
-                        
-                        <li class="research-item">
-                            <h3>Human Body Modelling</h3>
-                            <p>3D body shape and pose estimation. Human motion tracking and generation.</p>
-                        </li>
+
+                <div class="publication-item">
+                    <span class="publication-year">2025</span>
+                    <h3>PinTags: A Visual Fiducial Marker System for Logistics</h3>
+                    <p><strong>Vishwesh Vhavle</strong></p>
+                    <p>NCVPRIPG, 2025</p>
+                </div>
+
+                <div class="publication-item">
+                    <span class="publication-year">2024</span>
+                    <h3>Alfred: Open-Source Autonomous Mobile Robot Platform with Augmented Physical Testbed</h3>
+                    <p><strong>Vishwesh Vhavle*</strong> and Jatin Sharma*</p>
+                    <p>I-SMAC, 2024</p>
+                </div>
+            </div>
+
+            <!-- Experience Tab -->
+            <div id="experience" class="tab-content">
+                <h2>Experience</h2>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3>Research Fellow</h3>
+                            <h4>3DVisLab, Indian Institute of Technology, Jodhpur</h4>
+                        </div>
+                        <span>Jul 2025 – Current</span>
+                    </div>
+                    <ul>
+                        <li>Developing learning frameworks for arbitrary mesh triangulations for local-global geometric processing</li>
+                        <li>Working on improving human head mesh registration, detail-preserving deformations, and local template-based editing through surface geometry learning</li>
+                        <li>Applying discretization-agnostic frameworks to FMCW LiDAR data with doppler velocity information</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3>3D Computer Vision Research Intern</h3>
+                            <h4>Mercedes-Benz Research & Development, India</h4>
+                        </div>
+                        <span>Sep 2024 – Jul 2025</span>
+                    </div>
+                    <ul>
+                        <li>Developed a synthetic data generation pipeline to generate photorealistic images using morphable face avatars textured with 3D Gaussian Splatting for pre-training foundation models for driver monitoring systems</li>
+                        <li>Worked on Parametric Human Head Reconstruction from commodity monocular images with extreme camera distortions (Patent Filed and Technical Communications Paper Accepted at SIGGRAPH Asia 2025)</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3>Robotics Research Assistant</h3>
+                            <h4>Infosys Centre for Artificial Intelligence, IIIT Delhi</h4>
+                        </div>
+                        <span>May 2022 – Jun 2024</span>
+                    </div>
+                    <ul>
+                        <li>Developed an Open-Source Autonomous Mobile Robot (AMR) platform including the firmware, control system, perception, SLAM, navigation, and path-planner</li>
+                        <li>Designed a motion-capture facility for comprehensive AMR testing and Sim-to-Real transfer of Deep-RL policies trained using ROS and Gazebo framework</li>
+                        <li>Developed a framework for data-driven Trajectory Prediction of traffic agents using PyTorch, and deployed it on the autonomous vehicle project at IIIT Delhi</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Other Tab Containers - Will be loaded dynamically -->
-            <div id="publications" class="tab-content"></div>
-            <div id="datasets" class="tab-content"></div>
-            <div id="team" class="tab-content"></div>
-            <div id="openings" class="tab-content"></div>
-            <div id="contact" class="tab-content"></div>
+            <!-- Projects Tab -->
+            <div id="projects" class="tab-content">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/alfred.png" alt="Alfred Robot">
+                        </div>
+                        <div class="project-content">
+                            <h3>Alfred: Autonomous Mobile Robot</h3>
+                            <p>Open-source UGV platform with Velodyne VLP-16 LiDAR, NVIDIA AGX Orin for advanced robotics research.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/testbed.png" alt="Test Bed">
+                        </div>
+                        <div class="project-content">
+                            <h3>UGV Test-Bed Facility</h3>
+                            <p>200 sqm facility with real-time tracking achieving <2cm error for Sim-to-Real policy transfer.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/sim2.png" alt="Navigation">
+                        </div>
+                        <div class="project-content">
+                            <h3>Deep RL Navigation</h3>
+                            <p>TD3 policy gradient algorithm for autonomous navigation with Turtlebot 3 and VLP-16 LiDAR.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/tnt.png" alt="Motion Prediction">
+                        </div>
+                        <div class="project-content">
+                            <h3>Motion Prediction</h3>
+                            <p>Data-driven trajectory prediction framework for traffic agents using PyTorch.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/bunny.png" alt="Texture Synthesis">
+                        </div>
+                        <div class="project-content">
+                            <h3>Solid Texture Synthesis</h3>
+                            <p>Non-parametric texture optimization with histogram matching and OpenGL rendering.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/arm.png" alt="Manipulator">
+                        </div>
+                        <div class="project-content">
+                            <h3>Cylindrical Manipulator</h3>
+                            <p>3-DOF robotic manipulator with hand-eye coordination for package sorting.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Awards Tab -->
+            <div id="awards" class="tab-content">
+                <h2>Awards & Achievements</h2>
+                <ul class="awards-list">
+                    <li class="award-item">
+                        <div class="award-year">2025</div>
+                        <div class="award-content">
+                            <h3>First Runners-Up of the 3D Gaussian Splatting Challenge</h3>
+                            <p>3DGS Workshop, SIGGRAPH Asia 2025</p>
+                        </div>
+                    </li>
+
+                    <li class="award-item">
+                        <div class="award-year">2024</div>
+                        <div class="award-content">
+                            <h3>Best BTP in Engineering Track</h3>
+                            <p>Bachelor Thesis Project, Class of 2024, IIIT Delhi</p>
+                        </div>
+                    </li>
+
+                    <li class="award-item">
+                        <div class="award-year">2023</div>
+                        <div class="award-content">
+                            <h3>Top-Up Fellowship</h3>
+                            <p>ARTPARK IISc Bangalore</p>
+                        </div>
+                    </li>
+
+                    <li class="award-item">
+                        <div class="award-year">2023</div>
+                        <div class="award-content">
+                            <h3>Summer Undergraduate Research Fellowship</h3>
+                            <p>IIIT Delhi</p>
+                        </div>
+                    </li>
+
+                    <li class="award-item">
+                        <div class="award-year">2022</div>
+                        <div class="award-content">
+                            <h3>Nidhi-Prayas Seed Funding</h3>
+                            <p>₹7,00,000 from Government of India</p>
+                        </div>
+                    </li>
+
+                    <li class="award-item">
+                        <div class="award-year">2021</div>
+                        <div class="award-content">
+                            <h3>Finalist at Flipkart's GRiD 3.0</h3>
+                            <p>Robotics Competition</p>
+                        </div>
+                    </li>
+
+                    <li class="award-item">
+                        <div class="award-year">2021</div>
+                        <div class="award-content">
+                            <h3>50% Merit Scholarship</h3>
+                            <p>IIIT Delhi</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logos">
-                    <div class="footer-logo-item">
-                        <div class="footer-logo-badge">
-                            <img src="/assets/images/3dvislab.png" alt="3DVis Group Logo">
-                        </div>
-                    </div>
-                    <a href="https://www.iitj.ac.in" target="_blank" class="footer-logo-item footer-logo-link">
-                        <div class="footer-logo-badge">
-                            <img src="/assets/images/iitj-logo-orange.png" alt="IIT Jodhpur Logo">
-                        </div>
-                    </a>
-                    <a href="https://cvit.iiit.ac.in/" target="_blank" class="footer-logo-item footer-logo-link">
-                        <div class="footer-logo-badge">
-                            <img src="/assets/images/cvit-logo.png" alt="CVIT">
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>© 2025 3DVisLab, Department of Computer Science & Engineering, Indian Institute of Technology Jodhpur. All rights reserved.</p>
-            </div>
+            <p>© 2026 Vishwesh Vhavle. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Theme Management
-        function initializeTheme() {
-            let savedTheme = localStorage.getItem('theme');
-            if (!savedTheme) {
-                savedTheme = 'dark';
-                localStorage.setItem('theme', 'dark');
-            }
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
         }
 
         function toggleTheme() {
@@ -381,38 +641,8 @@
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            // Update both desktop and mobile icons
-            const desktopIcon = document.getElementById('theme-icon');
-            const mobileIcon = document.getElementById('mobile-theme-icon');
-            
-            if (desktopIcon) {
-                desktopIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-            }
-            if (mobileIcon) {
-                mobileIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-            }
+            document.getElementById('theme-icon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
         }
-        
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            const selectedTab = document.getElementById(tabName);
-            if (selectedTab) selectedTab.classList.add('active');
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeTheme();
-            showSlide(0);
-        });
     </script>
-    <script src="/assets/js/utils.js"></script>
-    <script src="/assets/js/loader.js"></script>
-    <script src="/assets/js/tabs.js"></script>
-    <script src="/assets/js/slideshow.js"></script>
-    <script src="/assets/js/cursor.js"></script>
-    <script src="/assets/js/mobile-menu.js"></script>
 </body>
 </html>
