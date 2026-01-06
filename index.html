@@ -34,11 +34,17 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
@@ -50,7 +56,7 @@
         /* Navigation */
         nav {
             background: var(--bg-secondary);
-            padding: 1.5rem 0;
+            padding: 0.75rem 0;
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
@@ -64,7 +70,7 @@
         }
 
         .nav-logo {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-primary);
         }
@@ -89,14 +95,102 @@
             color: var(--accent-primary);
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .theme-toggle {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            max-width: 300px;
+            height: 100%;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            transition: right 0.3s ease;
+            z-index: 200;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu-items {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-menu-items button {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            padding: 1rem 1.5rem;
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .mobile-menu-items button:hover,
+        .mobile-menu-items button.active {
+            background: var(--bg-card);
+            color: var(--accent-primary);
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 150;
+        }
+
+        .mobile-overlay.active {
+            display: block;
         }
 
         /* Hero Section */
@@ -130,6 +224,7 @@
         .hero-actions {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -162,7 +257,27 @@
             border-color: var(--accent-primary);
         }
 
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-primary);
+        }
+
         /* Tab Content */
+        main {
+            flex: 1 0 auto;
+        }
+
         .tab-content {
             display: none;
             padding: 3rem 0;
@@ -220,6 +335,8 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .experience-header h3 {
@@ -335,9 +452,10 @@
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             padding: 2rem 0;
-            margin-top: 4rem;
+            margin-top: auto;
             text-align: center;
             color: var(--text-secondary);
+            flex-shrink: 0;
         }
 
         /* Responsive */
@@ -346,22 +464,66 @@
                 display: none;
             }
 
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
             .hero {
                 flex-direction: column;
                 text-align: center;
+                padding: 2rem 0;
+            }
+
+            .hero-photo {
+                width: 150px;
+                height: 150px;
             }
 
             .hero-content h1 {
-                font-size: 2rem;
+                font-size: 1.75rem;
+            }
+
+            .hero-actions {
+                justify-content: center;
             }
 
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            .award-item {
+                flex-direction: column;
+            }
+
+            .tab-content {
+                padding: 2rem 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="nav-logo">Menu</div>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+        </div>
+        <ul class="mobile-menu-items">
+            <li><button class="mobile-tab-btn active" onclick="showTab('about')">About</button></li>
+            <li><button class="mobile-tab-btn" onclick="showTab('publications')">Publications</button></li>
+            <li><button class="mobile-tab-btn" onclick="showTab('experience')">Experience</button></li>
+            <li><button class="mobile-tab-btn" onclick="showTab('projects')">Projects</button></li>
+            <li><button class="mobile-tab-btn" onclick="showTab('awards')">Awards</button></li>
+        </ul>
+    </div>
+
     <!-- Navigation -->
     <nav>
         <div class="container">
@@ -370,13 +532,16 @@
                 <ul class="nav-tabs">
                     <li><button class="tab-btn active" onclick="showTab('about')">About</button></li>
                     <li><button class="tab-btn" onclick="showTab('publications')">Publications</button></li>
-                    <li><button class="tab-btn" onclick="showTab('experience')">Experience</button></li
+                    <li><button class="tab-btn" onclick="showTab('experience')">Experience</button></li>
                     <li><button class="tab-btn" onclick="showTab('projects')">Projects</button></li>
                     <li><button class="tab-btn" onclick="showTab('awards')">Awards</button></li>
                 </ul>
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <span id="theme-icon">☀️</span>
-                </button>
+                <div class="nav-right">
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <span id="theme-icon">☀️</span>
+                    </button>
+                    <button class="mobile-menu-btn" onclick="openMobileMenu()">☰</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -388,7 +553,6 @@
             <div id="about" class="tab-content active">
                 <div class="hero">
                     <div class="hero-photo">
-                        <!-- Replace with actual photo -->
                         <img src="assets/profile/profile.jpeg" alt="Vishwesh Vhavle" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                     </div>
                     <div class="hero-content">
@@ -406,6 +570,23 @@
                                 Download CV
                             </a>
                             <a href="mailto:vishweshvhavle@gmail.com" class="btn btn-secondary">Contact</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="https://scholar.google.com/citations?user=kgTeR74AAAAJ&hl" target="_blank" title="Google Scholar">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/vishweshvhavle" target="_blank" title="GitHub">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://linkedin.com/in/vishweshvhavle" target="_blank" title="LinkedIn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -628,12 +809,19 @@
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
+            document.querySelectorAll('.tab-btn, .mobile-tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             
             document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+            
+            document.querySelectorAll(`.tab-btn, .mobile-tab-btn`).forEach(btn => {
+                if (btn.textContent.toLowerCase() === tabName.toLowerCase()) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            closeMobileMenu();
         }
 
         function toggleTheme() {
@@ -642,6 +830,18 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', newTheme);
             document.getElementById('theme-icon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('mobileOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('mobileOverlay').classList.remove('active');
+            document.body.style.overflow = '';
         }
     </script>
 </body>
